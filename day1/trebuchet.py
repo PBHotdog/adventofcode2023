@@ -8,14 +8,36 @@ def readFile(filePath):
                 lines.append(line.strip())
         return lines
     except FileNotFoundError:
-        print("No file found oh fuck!!!!!!!!")
+        print("No file found :O")
         return None
     except Exception as exception:
         print("Error: {exception}")
     return None
 
-#Parsing/Adding functions
+#Dictionaries
+#Replacing stuff because I'm too tired to learn regex again
+replacementValues = {
+    "zerone": "zeroone",
+    "oneight": "oneeight",
+    "twone": "twoone",
+    "sevenine": "sevennine",
+    "eightwo": "eighttwo",
+    "eighthree": "eightthree",
+    "nineight": "nineeight"
+}
 
+convertWordstoNums = {
+    "one":   "1",
+    "two":   "2",
+    "three": "3",
+    "four":  "4",
+    "five":  "5",
+    "six":   "6",
+    "seven": "7",
+    "eight": "8",
+    "nine":  "9"
+  }
+#Parsing/Adding functions
 def getFirstAndLastNum(number):
     firstDigit = number[0]
     lastDigit = number[-1]
@@ -23,6 +45,14 @@ def getFirstAndLastNum(number):
         return ''.join([firstDigit,lastDigit])
     else:
         return ''.join([firstDigit,firstDigit])
+
+def replaceNumsandWeirdValues(line):
+    makeLower = line.lower()
+    for replaceWeirdValues in replacementValues.keys():
+        makeLower = makeLower.replace(replaceWeirdValues, replacementValues[replaceWeirdValues])
+    for number in convertWordstoNums:
+        makeLower = makeLower.replace(number, convertWordstoNums[number])
+
 
 def getNumPerLine(linesList):
     numsList = []
